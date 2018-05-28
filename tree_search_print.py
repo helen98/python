@@ -1,0 +1,62 @@
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+class BinaryTree(object):
+    
+    
+    def __init__(self, root):
+        self.root = Node(root)
+        self.result = ''
+
+    def search(self, find_val):
+        """Return True if the value
+        is in the tree, return
+        False otherwise."""
+        
+        start = self.root
+ 
+        if self.preorder_search(start, find_val) == True:
+            return True
+        else:
+            return False
+        
+
+    def print_tree(self):
+        """Print out all tree nodes
+        as they are visited in
+        a pre-order traversal."""
+        start = self.root
+        traversal = start.value
+        self.preorder_print(start, traversal)
+        return self.result
+
+
+
+    def preorder_search(self, start, find_val):
+        """Helper method - use this to create a 
+        recursive search solution."""
+        if start.value == find_val:
+            return True
+        else:
+            while start.left != None:
+                return self.preorder_search(start.right, find_val) + self.preorder_search(start.left, find_val) 
+            return False
+
+        
+        
+
+    def preorder_print(self, start, traversal):
+        """Helper method - use this to create a 
+        recursive print solution."""
+        # print traversal
+        
+        self.result = self.result + str(traversal)
+        if start.left:
+            self.result = self.result + '-'
+            self.preorder_print(start.left, start.left.value)
+        if start.right:
+            self.result = self.result + '-'
+            self.preorder_print(start.right, start.right.value)
